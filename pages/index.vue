@@ -60,11 +60,20 @@
 <script>
 import Logo from '~/components/Logo.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
+import { mapState } from 'vuex'
 
 export default {
   components: {
     Logo,
     VuetifyLogo
+  },
+  computed: {
+    ...mapState({
+      sample: 'sample'
+    })
+  },
+  mounted() {
+    console.log(this.sample.counter)
   }
 }
 </script>

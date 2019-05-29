@@ -62,30 +62,31 @@
   </v-app>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'bubble_chart',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+
+@Component
+class Default extends Vue {
+  clipped: boolean = false
+  drawer: boolean = false
+  fixed: boolean = false
+  items: { icon: string; title: string; to: string }[] = [
+    {
+      icon: 'apps',
+      title: 'Welcome',
+      to: '/'
+    },
+    {
+      icon: 'bubble_chart',
+      title: 'Inspire',
+      to: '/inspire'
     }
-  }
+  ]
+  miniVariant: boolean = false
+  right: boolean = true
+  rightDrawer: boolean = false
+  title: string = 'Vuetify.js'
 }
+
+export default Default
 </script>
