@@ -68,8 +68,11 @@ import { Component, Vue } from 'vue-property-decorator'
 @Component
 class Default extends Vue {
   clipped: boolean = false
+
   drawer: boolean = false
+
   fixed: boolean = false
+
   items: { icon: string; title: string; to: string }[] = [
     {
       icon: 'apps',
@@ -82,9 +85,13 @@ class Default extends Vue {
       to: '/inspire'
     }
   ]
+
   miniVariant: boolean = false
+
   right: boolean = true
+
   rightDrawer: boolean = false
+
   title: string = 'Vuetify.js'
 }
 

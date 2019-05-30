@@ -54,6 +54,8 @@
         </v-card-actions>
       </v-card>
     </v-flex>
+    <nuxt-link to="/sample">Go sample index</nuxt-link>
+    <router-link to="/sample/test">Go sample test</router-link>
   </v-layout>
 </template>
 
@@ -73,7 +75,7 @@ export default {
     })
   },
   mounted() {
-    console.log(this.sample.counter)
+    // console.log(this.sample.counter)
   }
 }
 </script>
