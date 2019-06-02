@@ -1,5 +1,6 @@
 interface IState {
-  counter: number
+  name: string
+  score: number
 }
 
 export const state: IState = {
