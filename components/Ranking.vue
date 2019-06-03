@@ -32,7 +32,7 @@ export default {
         { text: 'Protein (g)', value: 'protein' },
         { text: 'Iron (%)', value: 'iron' }
       ],
-      items: [
+      desserts: [
         {
           name: 'Frozen Yogurt',
           calories: 159,

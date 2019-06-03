@@ -1,10 +1,10 @@
-# nuxt-boilerplate
+# event-search
 
 > My groundbreaking Nuxt.js project
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ yarn install
 

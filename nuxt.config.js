@@ -34,26 +34,22 @@ module.exports = {
    */
   css: ['~/assets/style/app.styl'],
 
-  /*
-   ** Plugins to load before mounting the App
-   */
   plugins: ['@/plugins/vuetify'],
-
-  /*
-   ** Nuxt.js modules
-   */
-  modules: [
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa'
-  ],
+  modules: ['@nuxtjs/axios', '@nuxtjs/proxy', '@nuxtjs/pwa'],
   /*
    ** Axios module configuration
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
   },
-
+  proxy: {
+    '/connpass': {
+      target: 'https://connpass.com/api/v1/event',
+      pathRewrite: {
+        '^/connpass': '/'
+      }
+    }
+  },
   /*
    ** Build configuration
    */
