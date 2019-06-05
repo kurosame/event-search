@@ -2,7 +2,7 @@
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
       <div class="text-xs-center">
-        <ranking />
+        <summary />
       </div>
       <v-card>
         <v-card-title class="headline"
@@ -59,12 +59,12 @@
 </template>
 
 <script>
-import Ranking from '~/components/Ranking.vue'
+import Summary from '@/components/Summary.vue'
 import { mapState } from 'vuex'
 
 export default {
   components: {
-    Ranking
+    Summary
   },
   computed: {
     ...mapState({

@@ -6,7 +6,7 @@ export interface IEventState {
   address: string
 }
 
-interface IEventsState {
+export interface IEventsState {
   events: IEventState[]
 }
 
@@ -17,6 +17,5 @@ export const state: IEventsState = {
 export const mutations = {
   setEvents(state: IEventsState, events: IEventState[]) {
     state.events = events
-    console.log(state)
   }
 }
