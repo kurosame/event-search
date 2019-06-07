@@ -1,7 +1,13 @@
 <template>
   <v-data-table :headers="headers" :items="items">
     <template #items="{ item }">
-      <td v-for="h of headers" :key="h.value">{{ item[h.value] }}</td>
+      <td>{{ item.title }}</td>
+      <td>
+        <a :href="item.eventUrl" target="_blank">{{ item.eventUrl }}</a>
+      </td>
+      <td>{{ item.startedAt }}</td>
+      <td>{{ item.endedAt }}</td>
+      <td>{{ item.address }}</td>
     </template>
   </v-data-table>
 </template>

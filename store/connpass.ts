@@ -1,24 +1,48 @@
-import { IEventState } from '~/store/events'
+import { IEventState } from '@/store/events'
 
 export const actions = {
   async getConnpassEvents({ commit }) {
-    const res = await this.$axios.$get('/connpass', {
-      params: {
-        keyword: 'python'
-      }
-    })
+    const count = 100
+    const getEvents = (
+      events: {}[] = [],
+      start: number = 1
+    ): { [key: string]: any }[] =>
+      this.$axios
+        .$get('/connpass', {
+          params: {
+            keyword: '東京',
+            ym: '201906',
+            count,
+            start
+          }
+        })
+        .then(res =>
+          res.results_returned === count
+            ? getEvents([...events, ...res.events], start + count)
+            : [...events, ...res.events]
+        )
+        .catch(err => console.error(err))
+
+    const events = await getEvents()
+
     commit(
       'events/setEvents',
-      res.events.map(
-        e =>
-          ({
-            title: e.title,
-            eventUrl: e.event_url,
-            startedAt: e.started_at,
-            endedAt: e.ended_at,
-            address: e.address
-          } as IEventState)
-      ),
+      events
+        .filter(e => e.limit >= 30)
+        .map(
+          e =>
+            ({
+              title: e.title,
+              eventUrl: e.event_url,
+              startedAt: this.$moment(e.started_at).format(
+                'YYYY-MM-DD HH:mm:ss (ddd)'
+              ),
+              endedAt: this.$moment(e.ended_at).format(
+                'YYYY-MM-DD HH:mm:ss (ddd)'
+              ),
+              address: `${e.address} ${e.place}`
+            } as IEventState)
+        ),
       { root: true }
     )
   }

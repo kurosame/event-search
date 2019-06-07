@@ -35,13 +35,8 @@ module.exports = {
   css: ['~/assets/style/app.styl'],
 
   plugins: ['@/plugins/vuetify'],
-  modules: ['@nuxtjs/axios', '@nuxtjs/proxy', '@nuxtjs/pwa'],
-  /*
-   ** Axios module configuration
-   */
-  axios: {
-    // See https://github.com/nuxt-community/axios-module#options
-  },
+  modules: ['@nuxtjs/axios', '@nuxtjs/moment', '@nuxtjs/proxy', '@nuxtjs/pwa'],
+  moment: { locales: ['ja'] },
   proxy: {
     '/connpass': {
       target: 'https://connpass.com/api/v1/event',
