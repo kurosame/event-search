@@ -1,4 +1,4 @@
-import { IEventState } from '@/store/event'
+import { IEventState } from '~/store/events'
 
 export const actions = {
   async getConnpassEvents({ commit }) {
@@ -8,7 +8,7 @@ export const actions = {
       }
     })
     commit(
-      'event/setEvents',
+      'events/setEvents',
       res.events.map(
         e =>
           ({

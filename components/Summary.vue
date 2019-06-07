@@ -1,22 +1,18 @@
 <template>
-  <v-data-table :headers="headers" :items="items" class="elevation-1">
-    <template v-slot:items="props">
-      <td>{{ props.item.name }}</td>
-      <td class="text-xs-right">{{ props.item.calories }}</td>
-      <td class="text-xs-right">{{ props.item.fat }}</td>
-      <td class="text-xs-right">{{ props.item.carbs }}</td>
-      <td class="text-xs-right">{{ props.item.protein }}</td>
-      <td class="text-xs-right">{{ props.item.iron }}</td>
+  <v-data-table :headers="headers" :items="items">
+    <template #items="{ item }">
+      <td v-for="h of headers" :key="h.value">{{ item[h.value] }}</td>
     </template>
   </v-data-table>
 </template>
 <script lang="ts">
-import { IEventsState } from '@/store/event'
-import { Component, Vue } from 'vue-property-decorator'
+import StoreHelper from '@/components/mixins/StoreHelper.vue'
+import { IEventState } from '@/store/events'
+import { Component, Mixins } from 'vue-property-decorator'
 
 @Component
-class Summary extends Vue {
-  static get headers(): { text: string; value: string }[] {
+class Summary extends Mixins(StoreHelper) {
+  get headers(): { text: string; value: string }[] {
     return [
       { text: 'タイトル', value: 'title' },
       { text: 'URL', value: 'eventUrl' },
@@ -26,8 +22,8 @@ class Summary extends Vue {
     ]
   }
 
-  get items(): IEventsState {
-    return this.$store.state.event.events
+  get items(): IEventState[] {
+    return this.getState('events').events
   }
 }
 
