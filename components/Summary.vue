@@ -1,5 +1,10 @@
 <template>
-  <v-data-table :headers="headers" :items="items">
+  <v-data-table
+    :headers="headers"
+    :items="items"
+    :pagination.sync="pagination"
+    :loading="!items.length"
+  >
     <template #items="{ item }">
       <td>{{ item.title }}</td>
       <td>
@@ -18,6 +23,8 @@ import { Component, Mixins } from 'vue-property-decorator'
 
 @Component
 class Summary extends Mixins(StoreHelper) {
+  pagination: { sortBy: string } = { sortBy: 'startedAt' }
+
   get headers(): { text: string; value: string }[] {
     return [
       { text: 'タイトル', value: 'title' },

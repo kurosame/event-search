@@ -10,8 +10,8 @@ export const actions = {
       this.$axios
         .$get('/connpass', {
           params: {
-            keyword: '東京',
-            ym: '201906',
+            // keyword: '東京',
+            ymd: '20190601',
             count,
             start
           }
