@@ -38,6 +38,12 @@ module.exports = {
   modules: ['@nuxtjs/axios', '@nuxtjs/moment', '@nuxtjs/proxy', '@nuxtjs/pwa'],
   moment: { locales: ['ja'] },
   proxy: {
+    '/atnd': {
+      target: 'http://api.atnd.org/events',
+      pathRewrite: {
+        '^/atnd': '/'
+      }
+    },
     '/connpass': {
       target: 'https://connpass.com/api/v1/event',
       pathRewrite: {

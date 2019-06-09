@@ -62,11 +62,14 @@ class Summary extends Mixins(StoreHelper) {
   }
 
   mounted() {
-    Promise.all(
-      chunk(this.getDateRange(), 8).map(d =>
+    Promise.all([
+      ...chunk(this.getDateRange(), 8).map(d =>
+        this.$store.dispatch('atnd/getAtndEvents', d)
+      ),
+      ...chunk(this.getDateRange(), 8).map(d =>
         this.$store.dispatch('connpass/getConnpassEvents', d)
       )
-    ).then(() => (this.loading = false))
+    ]).then(() => (this.loading = false))
   }
 }
 

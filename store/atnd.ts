@@ -1,18 +1,19 @@
 import { IEventState } from '@/store/events'
 
 export const actions = {
-  async getConnpassEvents({ commit }, period: string[]) {
+  async getAtndEvents({ commit }, period: string[]) {
     const count = 100
     const getEvents = (
       events: {}[] = [],
       start: number = 1
     ): { [key: string]: any }[] =>
       this.$axios
-        .$get('/connpass', {
+        .$get('/atnd', {
           params: {
             ymd: period.join(','),
             start,
-            count
+            count,
+            format: 'json'
           }
         })
         .then(res =>
@@ -27,19 +28,19 @@ export const actions = {
     commit(
       'events/setEvents',
       events
-        .filter(e => e.limit >= 30)
+        .filter(e => e.event.limit >= 30)
         .map(
           e =>
             ({
-              title: e.title,
-              eventUrl: e.event_url,
-              startedAt: this.$moment(e.started_at).format(
+              title: e.event.title,
+              eventUrl: e.event.event_url,
+              startedAt: this.$moment(e.event.started_at).format(
                 'YYYY-MM-DD HH:mm:ss (ddd)'
               ),
-              endedAt: this.$moment(e.ended_at).format(
+              endedAt: this.$moment(e.event.ended_at).format(
                 'YYYY-MM-DD HH:mm:ss (ddd)'
               ),
-              address: `${e.address} ${e.place}`
+              address: `${e.event.address} ${e.event.place}`
             } as IEventState)
         ),
       { root: true }
