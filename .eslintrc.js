@@ -17,7 +17,7 @@ module.exports = {
   ],
   plugins: ['@typescript-eslint', 'prettier'],
   settings: {
-    'import/core-modules': ['vue', 'vuex']
+    'import/core-modules': ['vue', 'vuex', 'moment']
   },
   rules: {
     // Want to have constant property in computed

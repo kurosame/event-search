@@ -1,7 +1,7 @@
 import { IEventState } from '@/store/events'
 
 export const actions = {
-  async getConnpassEvents({ commit }) {
+  async getConnpassEvents({ commit }, period: string[]) {
     const count = 100
     const getEvents = (
       events: {}[] = [],
@@ -10,8 +10,7 @@ export const actions = {
       this.$axios
         .$get('/connpass', {
           params: {
-            // keyword: '東京',
-            ymd: '20190601',
+            ymd: period.join(','),
             count,
             start
           }

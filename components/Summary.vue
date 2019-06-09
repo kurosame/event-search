@@ -3,7 +3,7 @@
     :headers="headers"
     :items="items"
     :pagination.sync="pagination"
-    :loading="!items.length"
+    :loading="loading"
   >
     <template #items="{ item }">
       <td>{{ item.title }}</td>
@@ -20,10 +20,14 @@
 import StoreHelper from '@/components/mixins/StoreHelper.vue'
 import { IEventState } from '@/store/events'
 import { Component, Mixins } from 'vue-property-decorator'
+import { Moment } from 'moment'
+import chunk from 'lodash/chunk'
 
 @Component
 class Summary extends Mixins(StoreHelper) {
   pagination: { sortBy: string } = { sortBy: 'startedAt' }
+
+  loading: boolean = true
 
   get headers(): { text: string; value: string }[] {
     return [
@@ -37,6 +41,32 @@ class Summary extends Mixins(StoreHelper) {
 
   get items(): IEventState[] {
     return this.getState('events').events
+  }
+
+  get endDate(): Moment {
+    return this.$moment()
+      .add(1, 'months')
+      .endOf('month')
+  }
+
+  getDateRange(
+    dateRange: string[] = [],
+    nowDate: Moment = this.$moment()
+  ): string[] {
+    return nowDate.isSameOrBefore(this.endDate)
+      ? this.getDateRange(
+          [...dateRange, nowDate.format('YYYYMMDD')],
+          nowDate.add(1, 'days')
+        )
+      : dateRange
+  }
+
+  mounted() {
+    Promise.all(
+      chunk(this.getDateRange(), 8).map(d =>
+        this.$store.dispatch('connpass/getConnpassEvents', d)
+      )
+    ).then(() => (this.loading = false))
   }
 }
 

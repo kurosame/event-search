@@ -16,6 +16,6 @@ export const state: IEventsState = {
 
 export const mutations = {
   setEvents(state: IEventsState, events: IEventState[]) {
-    state.events = events
+    state.events = [...state.events, ...events]
   }
 }
