@@ -7,6 +7,8 @@
   >
     <template #items="{ item }">
       <td>{{ item.title }}</td>
+      <td>{{ item.catch }}</td>
+      <td>{{ item.description }}</td>
       <td>
         <a :href="item.eventUrl" target="_blank">{{ item.eventUrl }}</a>
       </td>
@@ -32,6 +34,8 @@ class Summary extends Mixins(StoreHelper) {
   get headers(): { text: string; value: string }[] {
     return [
       { text: 'タイトル', value: 'title' },
+      { text: 'キャッチ', value: 'catch' },
+      { text: '概要', value: 'description' },
       { text: 'URL', value: 'eventUrl' },
       { text: '開始日時', value: 'startedAt' },
       { text: '終了日時', value: 'endedAt' },

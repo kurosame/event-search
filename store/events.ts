@@ -1,5 +1,7 @@
 export interface IEventState {
   title: string
+  catch: string
+  description: string
   eventUrl: string
   startedAt: string
   endedAt: string

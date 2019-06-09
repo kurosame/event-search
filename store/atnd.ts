@@ -33,6 +33,8 @@ export const actions = {
           e =>
             ({
               title: e.event.title,
+              catch: e.event.catch,
+              description: e.event.description,
               eventUrl: e.event.event_url,
               startedAt: this.$moment(e.event.started_at).format(
                 'YYYY-MM-DD HH:mm:ss (ddd)'
