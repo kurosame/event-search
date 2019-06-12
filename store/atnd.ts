@@ -1,12 +1,29 @@
 import { IEventState } from '@/store/events'
 
+export interface IAtndEventResponse {
+  title: string
+  catch: string
+  description: string
+  event_url: string
+  started_at: string
+  ended_at: string
+  limit: number
+  address: string
+  place: string
+}
+
+export interface IAtndResponse {
+  results_returned: number
+  events: { event: IAtndEventResponse }[]
+}
+
 export const actions = {
   async getAtndEvents({ commit }, period: string[]) {
     const count = 100
     const getEvents = (
-      events: {}[] = [],
+      events: { event: IAtndEventResponse }[] = [],
       start: number = 1
-    ): { [key: string]: any }[] =>
+    ): { event: IAtndEventResponse }[] =>
       this.$axios
         .$get('/atnd', {
           params: {
@@ -16,21 +33,21 @@ export const actions = {
             format: 'json'
           }
         })
-        .then(res =>
+        .then((res: IAtndResponse) =>
           res.results_returned === count
             ? getEvents([...events, ...res.events], start + count)
             : [...events, ...res.events]
         )
         .catch(err => console.error(err))
 
-    const events = await getEvents()
+    const events: { event: IAtndEventResponse }[] = await getEvents()
 
     commit(
       'events/setEvents',
       events
-        .filter(e => e.event.limit >= 30)
+        .filter((e: { event: IAtndEventResponse }) => e.event.limit >= 30)
         .map(
-          e =>
+          (e: { event: IAtndEventResponse }) =>
             ({
               title: e.event.title,
               catch: e.event.catch,
