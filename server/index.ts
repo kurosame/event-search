@@ -4,7 +4,6 @@ const express = require('express')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
-const proxy = require('http-proxy-middleware')
 
 // Import and Set Nuxt.js options
 const config: NuxtConfiguration = require('../nuxt.config.js')
@@ -26,17 +25,6 @@ async function start() {
 
   // Give nuxt middleware to express
   app.use(nuxt.render)
-
-  app.use(
-    '/connpass',
-    proxy({
-      target: 'http://www.example.org',
-      changeOrigin: true,
-      pathRewrite: {
-        '^/connpass': '/'
-      }
-    })
-  )
 
   // Listen the server
   app.listen(port, host)
