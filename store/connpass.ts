@@ -24,7 +24,7 @@ export const actions = {
       events: IConnpassEventResponse[] = [],
       start: number = 1
     ): IConnpassEventResponse[] =>
-      this.$axios
+      (this as any).$axios
         .$get('/connpass', {
           params: {
             ymd: period.join(','),
@@ -52,12 +52,12 @@ export const actions = {
               catch: e.catch,
               description: e.description,
               eventUrl: e.event_url,
-              startedAt: this.$moment(e.started_at).format(
-                'YYYY-MM-DD HH:mm:ss (ddd)'
-              ),
-              endedAt: this.$moment(e.ended_at).format(
-                'YYYY-MM-DD HH:mm:ss (ddd)'
-              ),
+              startedAt: (this as any)
+                .$moment(e.started_at)
+                .format('YYYY-MM-DD HH:mm:ss (ddd)'),
+              endedAt: (this as any)
+                .$moment(e.ended_at)
+                .format('YYYY-MM-DD HH:mm:ss (ddd)'),
               address: `${e.address} ${e.place}`
             } as IEventState)
         ),

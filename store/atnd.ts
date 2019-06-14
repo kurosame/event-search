@@ -24,7 +24,7 @@ export const actions = {
       events: { event: IAtndEventResponse }[] = [],
       start: number = 1
     ): { event: IAtndEventResponse }[] =>
-      this.$axios
+      (this as any).$axios
         .$get('/atnd', {
           params: {
             ymd: period.join(','),
@@ -53,12 +53,12 @@ export const actions = {
               catch: e.event.catch,
               description: e.event.description,
               eventUrl: e.event.event_url,
-              startedAt: this.$moment(e.event.started_at).format(
-                'YYYY-MM-DD HH:mm:ss (ddd)'
-              ),
-              endedAt: this.$moment(e.event.ended_at).format(
-                'YYYY-MM-DD HH:mm:ss (ddd)'
-              ),
+              startedAt: (this as any)
+                .$moment(e.event.started_at)
+                .format('YYYY-MM-DD HH:mm:ss (ddd)'),
+              endedAt: (this as any)
+                .$moment(e.event.ended_at)
+                .format('YYYY-MM-DD HH:mm:ss (ddd)'),
               address: `${e.event.address} ${e.event.place}`
             } as IEventState)
         ),

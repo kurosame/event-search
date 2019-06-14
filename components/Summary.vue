@@ -69,14 +69,15 @@ class Summary extends Mixins(StoreHelper) {
   }
 
   get endDate(): Moment {
-    return this.$moment()
+    return (this as any)
+      .$moment()
       .add(1, 'months')
       .endOf('month')
   }
 
   getDateRange(
     dateRange: string[] = [],
-    nowDate: Moment = this.$moment()
+    nowDate: Moment = (this as any).$moment()
   ): string[] {
     return nowDate.isSameOrBefore(this.endDate)
       ? this.getDateRange(
