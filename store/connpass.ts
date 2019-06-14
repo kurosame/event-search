@@ -24,7 +24,7 @@ export const actions = {
     const getEvents = (
       events: IConnpassEventResponse[] = [],
       start: number = 1
-    ): IConnpassEventResponse[] =>
+    ): any =>
       axios
         .get('', {
           params: {
@@ -33,10 +33,11 @@ export const actions = {
             count
           },
           proxy: {
-            host: 'https://connpass.com/api/v1/event'
+            host: 'https://connpass.com/api/v1/event',
+            port: 0
           }
         })
-        .then((res: IConnpassResponse) => {
+        .then((res: any) => {
           console.log(res)
           res.data.results_returned === count
             ? getEvents([...events, ...res.data.events], start + count)
