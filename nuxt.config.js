@@ -35,10 +35,10 @@ module.exports = {
 
   plugins: ['@/plugins/vuetify'],
   modules: ['@nuxtjs/axios', '@nuxtjs/moment', '@nuxtjs/proxy', '@nuxtjs/pwa'],
-  axios: {
-    baseURL: 'https://event-search.netlify.com'
-  },
   moment: { locales: ['ja'] },
+  axios: {
+    proxy: true
+  },
   proxy: {
     '/atnd': {
       target: 'http://api.atnd.org/events',
