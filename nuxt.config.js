@@ -3,9 +3,6 @@ const pkg = require('./package')
 
 module.exports = {
   mode: 'universal',
-  env: {
-    baseUrl: 'https://event-search.netlify.com'
-  },
   /*
    ** Headers of the page
    */
@@ -38,6 +35,9 @@ module.exports = {
 
   plugins: ['@/plugins/vuetify'],
   modules: ['@nuxtjs/axios', '@nuxtjs/moment', '@nuxtjs/proxy', '@nuxtjs/pwa'],
+  axios: {
+    baseURL: 'https://event-search.netlify.com'
+  },
   moment: { locales: ['ja'] },
   proxy: {
     '/atnd': {
