@@ -25,7 +25,7 @@ export const actions = {
       start: number = 1
     ): IConnpassEventResponse[] =>
       (this as any).$axios
-        .$get('/connpass', {
+        .$get('', {
           params: {
             ymd: period.join(','),
             start,

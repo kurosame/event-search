@@ -37,7 +37,7 @@ module.exports = {
   modules: ['@nuxtjs/axios', '@nuxtjs/moment', '@nuxtjs/proxy', '@nuxtjs/pwa'],
   moment: { locales: ['ja'] },
   axios: {
-    baseURL: 'http://api.atnd.org/events'
+    baseURL: 'https://connpass.com/api/v1/event'
   },
   proxy: {
     '/atnd': {
