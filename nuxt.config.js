@@ -3,7 +3,9 @@ const pkg = require('./package')
 
 module.exports = {
   mode: 'universal',
-
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+  },
   /*
    ** Headers of the page
    */
