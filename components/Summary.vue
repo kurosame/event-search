@@ -21,7 +21,7 @@
       <template #items="{ item }">
         <td>{{ item.title }}</td>
         <td>{{ item.catch }}</td>
-        <td>{{ item.description }}</td>
+        <td v-show="false">{{ item.description }}</td>
         <td>
           <a :href="item.eventUrl" target="_blank">{{ item.eventUrl }}</a>
         </td>
@@ -32,6 +32,11 @@
     </v-data-table>
   </v-card>
 </template>
+<style scoped lang="scss">
+/deep/ .description {
+  display: none;
+}
+</style>
 <script lang="ts">
 import StoreHelper from '@/components/mixins/StoreHelper.vue'
 import { IEventState } from '@/store/events'
@@ -47,11 +52,11 @@ class Summary extends Mixins(StoreHelper) {
 
   loading: boolean = true
 
-  get headers(): { text: string; value: string }[] {
+  get headers(): { text: string; value: string; class?: string[] | string }[] {
     return [
       { text: 'タイトル', value: 'title' },
       { text: 'キャッチ', value: 'catch' },
-      { text: '概要', value: 'description' },
+      { text: '概要', value: 'description', class: 'description' },
       { text: 'URL', value: 'eventUrl' },
       { text: '開始日時', value: 'startedAt' },
       { text: '終了日時', value: 'endedAt' },
