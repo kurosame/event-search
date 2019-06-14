@@ -1,4 +1,5 @@
 import { IEventState } from '@/store/events'
+import axios from 'axios'
 
 export interface IConnpassEventResponse {
   title: string
@@ -24,19 +25,23 @@ export const actions = {
       events: IConnpassEventResponse[] = [],
       start: number = 1
     ): IConnpassEventResponse[] =>
-      (this as any).$axios
-        .$get('/connpass', {
+      axios
+        .get('', {
           params: {
             ymd: period.join(','),
             start,
             count
+          },
+          proxy: {
+            host: 'https://connpass.com/api/v1/event'
           }
         })
-        .then((res: IConnpassResponse) =>
-          res.results_returned === count
-            ? getEvents([...events, ...res.events], start + count)
-            : [...events, ...res.events]
-        )
+        .then((res: IConnpassResponse) => {
+          console.log(res)
+          res.data.results_returned === count
+            ? getEvents([...events, ...res.data.events], start + count)
+            : [...events, ...res.data.events]
+        })
         .catch(err => console.error(err))
 
     const events: IConnpassEventResponse[] = await getEvents()
