@@ -2,7 +2,7 @@ const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const pkg = require('./package')
 
 module.exports = {
-  mode: 'spa',
+  mode: 'universal',
   /*
    ** Headers of the page
    */
@@ -41,14 +41,17 @@ module.exports = {
       target: 'http://api.atnd.org/events',
       pathRewrite: {
         '^/atnd': '/'
-      }
+      },
+      changeOrigin: true
     },
     '/connpass': {
       target: 'https://connpass.com/api/v1/event',
       pathRewrite: {
         '^/connpass': '/'
-      }
-    }
+      },
+      changeOrigin: true
+    },
+    changeOrigin: true
   },
   /*
    ** Build configuration
