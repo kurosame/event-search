@@ -44,10 +44,7 @@ module.exports = {
       }
     },
     '/connpass': {
-      target: 'https://connpass.com/api/v1/event',
-      pathRewrite: {
-        '^/connpass': '/'
-      }
+      target: 'http://localhost:9000'
     }
   },
   /*

@@ -18,28 +18,10 @@ export interface IConnpassResponse {
 }
 
 export const actions = {
-  async getConnpassEvents({ commit }, period: string[]) {
-    const count = 100
-    const getEvents = (
-      events: IConnpassEventResponse[] = [],
-      start: number = 1
-    ): IConnpassEventResponse[] =>
-      (this as any).$axios
-        .$get('/connpass', {
-          params: {
-            ymd: period.join(','),
-            start,
-            count
-          }
-        })
-        .then((res: IConnpassResponse) =>
-          res.results_returned === count
-            ? getEvents([...events, ...res.events], start + count)
-            : [...events, ...res.events]
-        )
-        .catch(err => console.error(err))
-
-    const events: IConnpassEventResponse[] = await getEvents()
+  async getConnpassEvents({ commit }, period: string) {
+    const events: IConnpassEventResponse[] = await (this as any).$axios.$get(
+      `/connpass?period=${period}`
+    )
 
     commit(
       'events/setEvents',
