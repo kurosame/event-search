@@ -43,7 +43,7 @@ module.exports = {
         '^/atnd': '/'
       }
     },
-    '/.netlify/functions/connpass': {
+    '/connpass': {
       target: 'http://localhost:9000'
     }
   },
