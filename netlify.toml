@@ -2,5 +2,6 @@
   command = "yarn generate"
   functions = "functions/dist"
   publish = "dist"
-[build.environment]
-  BASE_URL = "https://event-search.netlify.com/.netlify/functions"
+[context.production]
+  [context.production.environment]
+    BASE_URL = "https://event-search.netlify.com/.netlify/functions"
