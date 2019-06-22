@@ -20,7 +20,7 @@ export interface IConnpassResponse {
 export const actions = {
   async getConnpassEvents({ commit }, period: string) {
     const events: IConnpassEventResponse[] = await (this as any).$axios.$get(
-      `/connpass?period=${period}`
+      `/.netlify/functions/connpass?period=${period}`
     )
 
     commit(
