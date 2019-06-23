@@ -21,7 +21,6 @@ export const actions = {
   async getConnpassEvents({ commit }, period: string) {
     const events: IConnpassEventResponse[] = await (this as any).$axios.$get(
       `/connpass?period=${period}`
-      // { baseURL: process.env.BASE_URL || 'http://localhost:3000' }
     )
 
     commit(
