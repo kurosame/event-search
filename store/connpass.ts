@@ -19,7 +19,6 @@ export interface IConnpassResponse {
 
 export const actions = {
   async getConnpassEvents({ commit }, period: string) {
-    console.log(process.env)
     const events: IConnpassEventResponse[] = await (this as any).$axios.$get(
       `/connpass?period=${period}`,
       { baseURL: process.env.BASE_URL || 'http://localhost:3000' }
