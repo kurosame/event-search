@@ -36,6 +36,9 @@ module.exports = {
   plugins: ['@/plugins/vuetify'],
   modules: ['@nuxtjs/axios', '@nuxtjs/moment', '@nuxtjs/proxy', '@nuxtjs/pwa'],
   moment: { locales: ['ja'] },
+  axios: {
+    baseURL: '/'
+  },
   proxy: {
     '/atnd': {
       target: 'http://api.atnd.org/events',
