@@ -38,15 +38,8 @@ module.exports = {
   moment: { locales: ['ja'] },
   axios: { baseURL: '/.netlify/functions' },
   proxy: {
-    '/atnd': {
-      target: 'http://api.atnd.org/events',
-      pathRewrite: {
-        '^/atnd': '/'
-      }
-    },
-    '/.netlify/functions/connpass': {
-      target: 'http://localhost:9000'
-    }
+    '/.netlify/functions/atnd': { target: 'http://localhost:9000' },
+    '/.netlify/functions/connpass': { target: 'http://localhost:9000' }
   },
   /*
    ** Build configuration
