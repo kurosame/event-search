@@ -21,7 +21,9 @@ export const actions = {
   async getAtndEvents({ commit }, period: string) {
     const events: {
       event: IAtndEventResponse
-    }[] = await (this as any).$axios.$get(`/atnd?period=${period}`)
+    }[] = await (this as any).$axios.$get(
+      `/.netlify/functions/atnd?period=${period}`
+    )
 
     commit(
       'events/setEvents',

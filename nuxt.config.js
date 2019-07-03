@@ -36,7 +36,7 @@ module.exports = {
   plugins: ['@/plugins/vuetify'],
   modules: ['@nuxtjs/axios', '@nuxtjs/moment', '@nuxtjs/proxy', '@nuxtjs/pwa'],
   moment: { locales: ['ja'] },
-  axios: { baseURL: '/.netlify/functions', retry: true },
+  axios: { retry: true },
   proxy: {
     '/.netlify/functions/atnd': { target: 'http://localhost:9000' },
     '/.netlify/functions/connpass': { target: 'http://localhost:9000' }
