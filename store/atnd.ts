@@ -18,29 +18,12 @@ export interface IAtndResponse {
 }
 
 export const actions = {
-  async getAtndEvents({ commit }, period: string[]) {
-    const count = 100
-    const getEvents = (
-      events: { event: IAtndEventResponse }[] = [],
-      start: number = 1
-    ): { event: IAtndEventResponse }[] =>
-      (this as any).$axios
-        .$get('/atnd', {
-          params: {
-            ymd: period.join(','),
-            start,
-            count,
-            format: 'json'
-          }
-        })
-        .then((res: IAtndResponse) =>
-          res.results_returned === count
-            ? getEvents([...events, ...res.events], start + count)
-            : [...events, ...res.events]
-        )
-        .catch(err => console.error(err))
-
-    const events: { event: IAtndEventResponse }[] = await getEvents()
+  async getAtndEvents({ commit }, period: string) {
+    const events: {
+      event: IAtndEventResponse
+    }[] = await (this as any).$axios.$get(
+      `/.netlify/functions/atnd?period=${period}`
+    )
 
     commit(
       'events/setEvents',

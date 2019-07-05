@@ -36,16 +36,10 @@ module.exports = {
   plugins: ['@/plugins/vuetify'],
   modules: ['@nuxtjs/axios', '@nuxtjs/moment', '@nuxtjs/proxy', '@nuxtjs/pwa'],
   moment: { locales: ['ja'] },
+  axios: { baseURL: '/', retry: true },
   proxy: {
-    '/atnd': {
-      target: 'http://api.atnd.org/events',
-      pathRewrite: {
-        '^/atnd': '/'
-      }
-    },
-    '/connpass': {
-      target: 'http://localhost:9000'
-    }
+    '/.netlify/functions/atnd': { target: 'http://localhost:9000' },
+    '/.netlify/functions/connpass': { target: 'http://localhost:9000' }
   },
   /*
    ** Build configuration
