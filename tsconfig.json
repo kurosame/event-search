@@ -1,21 +1,18 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "lib": ["esnext", "esnext.asynciterable", "dom"],
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
     "esModuleInterop": true,
     "experimentalDecorators": true,
-    "allowJs": true,
+    "lib": ["esnext", "esnext.asynciterable", "dom"],
+    "module": "esnext",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "paths": { "~/*": ["./*"], "@/*": ["./*"] },
+    "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "noImplicitAny": false,
-    "noEmit": true,
-    "baseUrl": ".",
-    "paths": {
-      "~/*": ["./*"],
-      "@/*": ["./*"]
-    },
+    "target": "esnext",
     "types": ["@types/node", "@nuxt/vue-app"]
   }
 }
