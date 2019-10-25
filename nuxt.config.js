@@ -66,5 +66,6 @@ module.exports = {
         })
       }
     }
-  }
+  },
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/eslint-module']
 }

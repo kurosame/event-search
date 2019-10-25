@@ -1,4 +1,6 @@
+import { ActionContext, ActionTree } from 'vuex'
 import { IEventState } from '@/store/events'
+import { IState } from '@/store/index'
 
 export interface IConnpassEventResponse {
   title: string
@@ -17,8 +19,11 @@ export interface IConnpassResponse {
   events: IConnpassEventResponse[]
 }
 
-export const actions = {
-  async getConnpassEvents({ commit }, period: string) {
+export const actions: ActionTree<IEventState, IState> = {
+  async getConnpassEvents(
+    { commit }: ActionContext<IEventState, IState>,
+    period: string
+  ) {
     const events: IConnpassEventResponse[] = await (this as any).$axios.$get(
       `/.netlify/functions/connpass?period=${period}`
     )

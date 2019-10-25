@@ -1,4 +1,6 @@
+import { ActionContext, ActionTree } from 'vuex'
 import { IEventState } from '@/store/events'
+import { IState } from '@/store/index'
 
 export interface IAtndEventResponse {
   title: string
@@ -17,8 +19,11 @@ export interface IAtndResponse {
   events: { event: IAtndEventResponse }[]
 }
 
-export const actions = {
-  async getAtndEvents({ commit }, period: string) {
+export const actions: ActionTree<IEventState, IState> = {
+  async getAtndEvents(
+    { commit }: ActionContext<IEventState, IState>,
+    period: string
+  ) {
     const events: {
       event: IAtndEventResponse
     }[] = await (this as any).$axios.$get(

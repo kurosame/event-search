@@ -38,11 +38,11 @@
 }
 </style>
 <script lang="ts">
+import chunk from 'lodash/chunk'
+import { Moment } from 'moment'
+import { Component, Mixins } from 'vue-property-decorator'
 import StoreHelper from '@/components/mixins/StoreHelper.vue'
 import { IEventState } from '@/store/events'
-import { Component, Mixins } from 'vue-property-decorator'
-import { Moment } from 'moment'
-import chunk from 'lodash/chunk'
 
 @Component
 class Summary extends Mixins(StoreHelper) {
@@ -65,7 +65,7 @@ class Summary extends Mixins(StoreHelper) {
   }
 
   get items(): IEventState[] {
-    return this.getState('events').events
+    return (this.getState('events') || { events: [] }).events
   }
 
   get endDate(): Moment {

@@ -9,7 +9,7 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
-    '@nuxtjs',
+    '@nuxtjs/eslint-config-typescript',
     'plugin:nuxt/recommended',
     'plugin:prettier/recommended',
     'prettier',

@@ -1,6 +1,6 @@
 <script lang="ts">
-import { IState } from '@/store/index'
 import { Component, Vue } from 'vue-property-decorator'
+import { IState } from '@/store/index'
 
 @Component
 class StoreHelper extends Vue {
