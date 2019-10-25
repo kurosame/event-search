@@ -1,4 +1,4 @@
 [build]
-  command = "yarn generate"
+  command = "npm run generate"
   functions = "functions/dist"
   publish = "dist"
