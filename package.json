@@ -5,11 +5,11 @@
   "author": "kurosame",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon server/index.ts --watch server",
-    "build": "nuxt build",
-    "start": "cross-env NODE_ENV=production ts-node server/index.ts",
+    "dev": "nuxt-ts",
+    "build": "nuxt-ts build",
+    "start": "nuxt-ts start",
     "lambda": "netlify-lambda serve functions/src",
-    "generate": "netlify-lambda build functions/src && nuxt generate",
+    "generate": "netlify-lambda build functions/src && nuxt-ts generate",
     "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
     "test": "jest"
@@ -19,7 +19,6 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/moment": "^1.2.0",
     "@nuxtjs/pwa": "^2.6.0",
-    "cross-env": "^5.2.0",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
     "nuxt": "^2.4.0",
@@ -55,13 +54,11 @@
     "eslint-plugin-vue": "^5.2.2",
     "jest": "^24.1.0",
     "netlify-lambda": "^1.4.13",
-    "node-sass": "^4.12.0",
-    "nodemon": "^1.18.9",
+    "node-sass": "^4.13.0",
     "prettier": "^1.16.4",
     "sass-loader": "^7.1.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "ts-node": "^8.2.0",
     "vue-jest": "^3.0.3"
   }
 }

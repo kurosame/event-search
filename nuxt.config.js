@@ -67,5 +67,14 @@ module.exports = {
       }
     }
   },
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/eslint-module']
+  buildModules: [
+    [
+      '@nuxt/typescript-build',
+      {
+        typeCheck: true,
+        ignoreNotFoundWarnings: true
+      }
+    ],
+    '@nuxtjs/eslint-module'
+  ]
 }
