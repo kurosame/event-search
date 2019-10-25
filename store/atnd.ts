@@ -26,9 +26,7 @@ export const actions: ActionTree<IEventState, IState> = {
   ) {
     const events: {
       event: IAtndEventResponse
-    }[] = await (this as any).$axios.$get(
-      `/.netlify/functions/atnd?period=${period}`
-    )
+    }[] = await this.$axios.$get(`/.netlify/functions/atnd?period=${period}`)
 
     commit(
       'events/setEvents',
@@ -41,12 +39,12 @@ export const actions: ActionTree<IEventState, IState> = {
               catch: e.event.catch,
               description: e.event.description,
               eventUrl: e.event.event_url,
-              startedAt: (this as any)
-                .$moment(e.event.started_at)
-                .format('YYYY-MM-DD HH:mm:ss (ddd)'),
-              endedAt: (this as any)
-                .$moment(e.event.ended_at)
-                .format('YYYY-MM-DD HH:mm:ss (ddd)'),
+              startedAt: this.$moment(e.event.started_at).format(
+                'YYYY-MM-DD HH:mm:ss (ddd)'
+              ),
+              endedAt: this.$moment(e.event.ended_at).format(
+                'YYYY-MM-DD HH:mm:ss (ddd)'
+              ),
               address: `${e.event.address} ${e.event.place}`
             } as IEventState)
         ),

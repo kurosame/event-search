@@ -24,7 +24,7 @@ export const actions: ActionTree<IEventState, IState> = {
     { commit }: ActionContext<IEventState, IState>,
     period: string
   ) {
-    const events: IConnpassEventResponse[] = await (this as any).$axios.$get(
+    const events: IConnpassEventResponse[] = await this.$axios.$get(
       `/.netlify/functions/connpass?period=${period}`
     )
 
@@ -39,12 +39,12 @@ export const actions: ActionTree<IEventState, IState> = {
               catch: e.catch,
               description: e.description,
               eventUrl: e.event_url,
-              startedAt: (this as any)
-                .$moment(e.started_at)
-                .format('YYYY-MM-DD HH:mm:ss (ddd)'),
-              endedAt: (this as any)
-                .$moment(e.ended_at)
-                .format('YYYY-MM-DD HH:mm:ss (ddd)'),
+              startedAt: this.$moment(e.started_at).format(
+                'YYYY-MM-DD HH:mm:ss (ddd)'
+              ),
+              endedAt: this.$moment(e.ended_at).format(
+                'YYYY-MM-DD HH:mm:ss (ddd)'
+              ),
               address: `${e.address} ${e.place}`
             } as IEventState)
         ),
