@@ -1,6 +1,6 @@
-import { IAtndEventResponse, IAtndResponse } from '@/store/atnd'
 import axios, { AxiosResponse } from 'axios'
 import { APIGatewayProxyEvent } from 'aws-lambda'
+import { IAtndEventResponse, IAtndResponse } from '@/store/atnd'
 
 export async function handler(event: APIGatewayProxyEvent) {
   const ymd = (event.queryStringParameters || { period: '' }).period

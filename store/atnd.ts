@@ -2,6 +2,7 @@ import { ActionContext, ActionTree } from 'vuex'
 import { IEventState } from '@/store/events'
 import { IState } from '@/store/index'
 
+/* eslint-disable camelcase */
 export interface IAtndEventResponse {
   title: string
   catch: string
@@ -18,6 +19,7 @@ export interface IAtndResponse {
   results_returned: number
   events: { event: IAtndEventResponse }[]
 }
+/* eslint-enable camelcase */
 
 export const actions: ActionTree<IEventState, IState> = {
   async getAtndEvents(
