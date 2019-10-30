@@ -1,7 +1,9 @@
+import { Configuration } from '@nuxt/types'
+
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const pkg = require('./package')
 
-module.exports = {
+const nuxtConfig: Configuration = {
   mode: 'universal',
   /*
    ** Headers of the page
@@ -58,6 +60,7 @@ module.exports = {
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
+        if (!config.module) return
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
@@ -78,3 +81,5 @@ module.exports = {
     '@nuxtjs/eslint-module'
   ]
 }
+
+export default nuxtConfig
