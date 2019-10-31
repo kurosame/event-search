@@ -1,0 +1,90 @@
+references:
+  commands:
+    setup-docker-base: &setup-docker-base
+      docker:
+        - image: kurosame/circleci-node
+
+version: 2
+jobs:
+  outdated:
+    <<: *setup-docker-base
+    steps:
+      - checkout
+      - restore_cache:
+          name: Download and cache dependencies
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run:
+          name: Install
+          command: npm install
+      - save_cache:
+          name: Cache dependencies
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Outdated
+          command: |
+            PAYLOAD=`cat << EOF
+            {
+              "attachments": [
+                {
+                  "pretext": "event-search's Outdated",
+                  "text": '$(npm outdated)',
+                  "mrkdwn_in": ["text"]
+                }
+              ]
+            }
+            EOF`
+            curl -X POST -d "payload=$PAYLOAD" $SLACK_WEBHOOK_URL
+  lighthouse:
+    <<: *setup-docker-base
+    steps:
+      - checkout
+      - restore_cache:
+          name: Download and cache dependencies
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run:
+          name: Install
+          command: npm install
+      - save_cache:
+          name: Cache dependencies
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Lighthouse
+          command: ./node_modules/.bin/lighthouse --chrome-flags="--headless --no-sandbox" --output-path=./lighthouse-results.html $EVENT_SEARCH_APP_URL
+      - store_artifacts:
+          path: ./lighthouse-results.html
+      - run:
+          name: Send to Slack
+          command: |
+            PAYLOAD=`cat << EOF
+            {
+              "attachments": [
+                {
+                  "pretext": "event-search's Lighthouse",
+                  "text": "https://${CIRCLE_BUILD_NUM}-${CIRCLE_CI_REPOSITORY_ID}-gh.circle-artifacts.com/0/root/project/lighthouse-results.html",
+                }
+              ]
+            }
+            EOF`
+            curl -X POST -d "payload=$PAYLOAD" $SLACK_WEBHOOK_URL
+
+workflows:
+  version: 2
+  nightly:
+    triggers:
+      - schedule:
+          cron: '00 0 * * 1'
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - outdated
+      - lighthouse
