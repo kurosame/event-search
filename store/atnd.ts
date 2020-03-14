@@ -1,9 +1,9 @@
 import { ActionContext, ActionTree } from 'vuex'
-import { IEventState } from '@/store/events'
-import { IState } from '@/store/index'
+import { EventState } from '@/store/events'
+import { State } from '@/store/index'
 
 /* eslint-disable camelcase */
-export interface IAtndEventResponse {
+export interface AtndEventResponse {
   title: string
   catch: string
   description: string
@@ -15,27 +15,27 @@ export interface IAtndEventResponse {
   place: string
 }
 
-export interface IAtndResponse {
+export interface AtndResponse {
   results_returned: number
-  events: { event: IAtndEventResponse }[]
+  events: { event: AtndEventResponse }[]
 }
 /* eslint-enable camelcase */
 
-export const actions: ActionTree<IEventState, IState> = {
+export const actions: ActionTree<EventState, State> = {
   async getAtndEvents(
-    { commit }: ActionContext<IEventState, IState>,
+    { commit }: ActionContext<EventState, State>,
     period: string
   ) {
     const events: {
-      event: IAtndEventResponse
+      event: AtndEventResponse
     }[] = await this.$axios.$get(`/.netlify/functions/atnd?period=${period}`)
 
     commit(
       'events/setEvents',
       events
-        .filter((e: { event: IAtndEventResponse }) => e.event.limit >= 30)
+        .filter((e: { event: AtndEventResponse }) => e.event.limit >= 30)
         .map(
-          (e: { event: IAtndEventResponse }) =>
+          (e: { event: AtndEventResponse }) =>
             ({
               title: e.event.title,
               catch: e.event.catch,
@@ -48,7 +48,7 @@ export const actions: ActionTree<IEventState, IState> = {
                 'YYYY-MM-DD HH:mm:ss (ddd)'
               ),
               address: `${e.event.address} ${e.event.place}`
-            } as IEventState)
+            } as EventState)
         ),
       { root: true }
     )

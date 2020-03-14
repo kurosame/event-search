@@ -1,5 +1,5 @@
-import { IEventsState } from '@/store/events'
+import { EventsState } from '@/store/events'
 
-export interface IState {
-  events: IEventsState
+export interface State {
+  events: EventsState
 }

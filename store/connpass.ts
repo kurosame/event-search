@@ -1,9 +1,9 @@
 import { ActionContext, ActionTree } from 'vuex'
-import { IEventState } from '@/store/events'
-import { IState } from '@/store/index'
+import { EventState } from '@/store/events'
+import { State } from '@/store/index'
 
 /* eslint-disable camelcase */
-export interface IConnpassEventResponse {
+export interface ConnpassEventResponse {
   title: string
   catch: string
   description: string
@@ -15,27 +15,27 @@ export interface IConnpassEventResponse {
   place: string
 }
 
-export interface IConnpassResponse {
+export interface ConnpassResponse {
   results_returned: number
-  events: IConnpassEventResponse[]
+  events: ConnpassEventResponse[]
 }
 /* eslint-enable camelcase */
 
-export const actions: ActionTree<IEventState, IState> = {
+export const actions: ActionTree<EventState, State> = {
   async getConnpassEvents(
-    { commit }: ActionContext<IEventState, IState>,
+    { commit }: ActionContext<EventState, State>,
     period: string
   ) {
-    const events: IConnpassEventResponse[] = await this.$axios.$get(
+    const events: ConnpassEventResponse[] = await this.$axios.$get(
       `/.netlify/functions/connpass?period=${period}`
     )
 
     commit(
       'events/setEvents',
       events
-        .filter((e: IConnpassEventResponse) => e.limit >= 30)
+        .filter((e: ConnpassEventResponse) => e.limit >= 30)
         .map(
-          (e: IConnpassEventResponse) =>
+          (e: ConnpassEventResponse) =>
             ({
               title: e.title,
               catch: e.catch,
@@ -48,7 +48,7 @@ export const actions: ActionTree<IEventState, IState> = {
                 'YYYY-MM-DD HH:mm:ss (ddd)'
               ),
               address: `${e.address} ${e.place}`
-            } as IEventState)
+            } as EventState)
         ),
       { root: true }
     )

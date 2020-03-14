@@ -1,4 +1,4 @@
-export interface IEventState {
+export interface EventState {
   title: string
   catch: string
   description: string
@@ -8,16 +8,16 @@ export interface IEventState {
   address: string
 }
 
-export interface IEventsState {
-  events: IEventState[]
+export interface EventsState {
+  events: EventState[]
 }
 
-export const state: IEventsState = {
+export const state: EventsState = {
   events: []
 }
 
 export const mutations = {
-  setEvents(state: IEventsState, events: IEventState[]) {
+  setEvents(state: EventsState, events: EventState[]): void {
     state.events = [...state.events, ...events]
   }
 }

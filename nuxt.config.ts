@@ -63,7 +63,7 @@ const nuxtConfig: Configuration = {
         if (!config.module) return
         config.module.rules.push({
           enforce: 'pre',
-          test: /\.(js|vue)$/,
+          test: /\.(js|ts|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/
         })

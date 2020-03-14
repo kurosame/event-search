@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-text-field
         v-model="search"
         label="Search"
@@ -21,7 +21,9 @@
       <template #items="{ item }">
         <td>{{ item.title }}</td>
         <td>{{ item.catch }}</td>
-        <td v-show="false">{{ item.description }}</td>
+        <td v-show="false">
+          {{ item.description }}
+        </td>
         <td>
           <a :href="item.eventUrl" target="_blank">{{ item.eventUrl }}</a>
         </td>
@@ -33,7 +35,7 @@
   </v-card>
 </template>
 <style scoped lang="scss">
-/deep/ .description {
+::v-deep .description {
   display: none;
 }
 </style>
@@ -42,15 +44,15 @@ import chunk from 'lodash/chunk'
 import { Moment } from 'moment'
 import { Component, Mixins } from 'vue-property-decorator'
 import StoreHelper from '@/components/mixins/StoreHelper.vue'
-import { IEventState } from '@/store/events'
+import { EventState } from '@/store/events'
 
 @Component
 class Summary extends Mixins(StoreHelper) {
-  search: string = ''
+  search = ''
 
   pagination: { sortBy: string } = { sortBy: 'startedAt' }
 
-  loading: boolean = true
+  loading = true
 
   get headers(): { text: string; value: string; class?: string[] | string }[] {
     return [
@@ -64,7 +66,7 @@ class Summary extends Mixins(StoreHelper) {
     ]
   }
 
-  get items(): IEventState[] {
+  get items(): EventState[] {
     return (this.getState('events') || { events: [] }).events
   }
 
@@ -78,15 +80,17 @@ class Summary extends Mixins(StoreHelper) {
     dateRange: string[] = [],
     nowDate: Moment = this.$moment()
   ): string[] {
+    /* eslint-disable indent */
     return nowDate.isSameOrBefore(this.endDate)
       ? this.getDateRange(
           [...dateRange, nowDate.format('YYYYMMDD')],
           nowDate.add(1, 'days')
         )
       : dateRange
+    /* eslint-enable indent */
   }
 
-  mounted() {
+  mounted(): void {
     Promise.all([
       ...chunk(this.getDateRange(), 8).map(d =>
         this.$store.dispatch('atnd/getAtndEvents', d.join(','))
