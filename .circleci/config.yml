@@ -17,11 +17,11 @@ jobs:
             - v1-dependencies-
       - run:
           name: Install
-          command: npm install
+          command: npm ci
       - save_cache:
           name: Cache dependencies
           paths:
-            - node_modules
+            - ~/.npm
           key: v1-dependencies-{{ checksum "package-lock.json" }}
       - run:
           name: Outdated
@@ -49,11 +49,11 @@ jobs:
             - v1-dependencies-
       - run:
           name: Install
-          command: npm install
+          command: npm ci
       - save_cache:
           name: Cache dependencies
           paths:
-            - node_modules
+            - ~/.npm
           key: v1-dependencies-{{ checksum "package-lock.json" }}
       - run:
           name: Lighthouse
