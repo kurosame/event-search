@@ -1,6 +1,6 @@
 import { Configuration } from '@nuxt/types'
 
-const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
+// const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const pkg = require('./package')
 
 const nuxtConfig: Configuration = {
@@ -33,9 +33,9 @@ const nuxtConfig: Configuration = {
   /*
    ** Global CSS
    */
-  css: ['~/assets/style/app.styl'],
+  // css: ['~/assets/style/app.styl'],
 
-  plugins: ['@/plugins/vuetify'],
+  // plugins: ['@/plugins/vuetify'],
   modules: ['@nuxtjs/axios', '@nuxtjs/moment', '@nuxtjs/proxy', '@nuxtjs/pwa'],
   moment: { locales: ['ja'] },
   axios: { baseURL: '/', retry: true },
@@ -47,13 +47,13 @@ const nuxtConfig: Configuration = {
    ** Build configuration
    */
   build: {
-    transpile: ['vuetify/lib'],
-    plugins: [new VuetifyLoaderPlugin()],
-    loaders: {
-      stylus: {
-        import: ['~assets/style/variables.styl']
-      }
-    },
+    // transpile: ['vuetify/lib'],
+    // plugins: [new VuetifyLoaderPlugin()],
+    // loaders: {
+    //   stylus: {
+    //     import: ['~assets/style/variables.styl']
+    //   }
+    // },
     /*
      ** You can extend webpack config here
      */
@@ -73,11 +73,9 @@ const nuxtConfig: Configuration = {
   buildModules: [
     [
       '@nuxt/typescript-build',
-      {
-        typeCheck: true,
-        ignoreNotFoundWarnings: true
-      }
+      { typeCheck: true, ignoreNotFoundWarnings: true }
     ],
+    ['@nuxtjs/vuetify', { theme: { dark: true } }],
     '@nuxtjs/eslint-module'
   ]
 }

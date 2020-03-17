@@ -14,22 +14,27 @@
       :headers="headers"
       :items="items"
       :search="search"
-      :rows-per-page-items="[10, 50, 100]"
-      :pagination.sync="pagination"
+      :sort-by.sync="sortBy"
+      :sort-desc.sync="sortDesc"
+      :footer-props="{ 'items-per-page-options': [10, 50, 100, -1] }"
       :loading="loading"
     >
-      <template #items="{ item }">
-        <td>{{ item.title }}</td>
-        <td>{{ item.catch }}</td>
-        <td v-show="false">
-          {{ item.description }}
-        </td>
-        <td>
-          <a :href="item.eventUrl" target="_blank">{{ item.eventUrl }}</a>
-        </td>
-        <td>{{ item.startedAt }}</td>
-        <td>{{ item.endedAt }}</td>
-        <td>{{ item.address }}</td>
+      <template #body="{ items }">
+        <tbody>
+          <tr v-for="r in items" :key="r.eventUrl">
+            <td>{{ r.title }}</td>
+            <td>{{ r.catch }}</td>
+            <td v-show="false">
+              {{ r.description }}
+            </td>
+            <td>
+              <a :href="r.eventUrl" target="_blank">{{ r.eventUrl }}</a>
+            </td>
+            <td>{{ r.startedAt }}</td>
+            <td>{{ r.endedAt }}</td>
+            <td>{{ r.address }}</td>
+          </tr>
+        </tbody>
       </template>
     </v-data-table>
   </v-card>
@@ -49,9 +54,8 @@ import { EventState } from '@/store/events'
 @Component
 class Summary extends Mixins(StoreHelper) {
   search = ''
-
-  pagination: { sortBy: string } = { sortBy: 'startedAt' }
-
+  sortBy = 'startedAt'
+  sortDesc = false
   loading = true
 
   get headers(): { text: string; value: string; class?: string[] | string }[] {
