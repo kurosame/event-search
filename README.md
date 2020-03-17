@@ -6,7 +6,7 @@ https://event-search.netlify.com
 
 - node-sass  
   Depends on sass-loader
-- eslint-plugin-node
+- eslint-plugin-node  
   Depends on @nuxtjs/eslint-config-typescript
 
 ## License

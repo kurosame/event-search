@@ -48,7 +48,6 @@
     "node-sass": "^4.13.1",
     "nuxt": "^2.11.0",
     "sass-loader": "^8.0.2",
-    "vue-jest": "^3.0.3",
-    "vuetify-loader": "^1.4.3"
+    "vue-jest": "^3.0.3"
   }
 }
