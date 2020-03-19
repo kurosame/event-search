@@ -25,6 +25,23 @@ const nuxtConfig: Configuration = {
     '/.netlify/functions/atnd': { target: 'http://localhost:9000' },
     '/.netlify/functions/connpass': { target: 'http://localhost:9000' }
   },
+  pwa: {
+    workbox: { dev: true },
+    manifest: {
+      /* eslint-disable @typescript-eslint/camelcase */
+      name: 'Event Search',
+      short_name: 'Evt Srch',
+      icons: [
+        {
+          src: '/favicon.png',
+          sizes: '512x512',
+          type: 'image/png'
+        }
+      ],
+      theme_color: 'black'
+      /* eslint-enable @typescript-eslint/camelcase */
+    }
+  },
   build: {
     extend(config, ctx): void {
       if (config.module && ctx.isDev && ctx.isClient) {
