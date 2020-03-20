@@ -1,7 +1,7 @@
 import { Configuration } from '@nuxt/types'
 
 const nuxtConfig: Configuration = {
-  mode: 'universal',
+  mode: 'spa',
   head: {
     title: 'Event Search',
     meta: [
@@ -26,7 +26,7 @@ const nuxtConfig: Configuration = {
     '/.netlify/functions/connpass': { target: 'http://localhost:9000' }
   },
   pwa: {
-    workbox: { dev: true },
+    // workbox: { dev: true },
     manifest: {
       /* eslint-disable @typescript-eslint/camelcase */
       name: 'Event Search',
