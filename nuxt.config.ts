@@ -30,7 +30,7 @@ const nuxtConfig: Configuration = {
     manifest: {
       /* eslint-disable @typescript-eslint/camelcase */
       name: 'Event Search',
-      short_name: 'Evt Srch',
+      short_name: 'Event Search',
       icons: [
         {
           src: '/favicon.png',
