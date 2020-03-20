@@ -1,7 +1,7 @@
 import { Configuration } from '@nuxt/types'
 
 const nuxtConfig: Configuration = {
-  mode: 'spa',
+  mode: 'universal',
   head: {
     title: 'Event Search',
     meta: [
