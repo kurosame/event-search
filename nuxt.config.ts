@@ -38,6 +38,7 @@ const nuxtConfig: Configuration = {
           type: 'image/png'
         }
       ],
+      display: 'standalone',
       theme_color: 'black'
       /* eslint-enable @typescript-eslint/camelcase */
     }
