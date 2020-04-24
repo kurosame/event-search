@@ -45,8 +45,8 @@
 }
 </style>
 <script lang="ts">
-import chunk from 'lodash/chunk'
 import { Moment } from 'moment'
+import splitEvery from 'ramda/src/splitEvery'
 import { Component, Mixins } from 'vue-property-decorator'
 import StoreHelper from '@/components/mixins/StoreHelper.vue'
 import { EventState } from '@/store/events'
@@ -96,10 +96,11 @@ class Summary extends Mixins(StoreHelper) {
 
   mounted(): void {
     Promise.all([
-      ...chunk(this.getDateRange(), 8).map(d =>
-        this.$store.dispatch('atnd/getAtndEvents', d.join(','))
-      ),
-      ...chunk(this.getDateRange(), 5).map(d =>
+      // The service has ended
+      // ...splitEvery(8, this.getDateRange()).map(d =>
+      //   this.$store.dispatch('atnd/getAtndEvents', d.join(','))
+      // ),
+      ...splitEvery(5, this.getDateRange()).map(d =>
         this.$store.dispatch('connpass/getConnpassEvents', d.join(','))
       )
     ]).then(() => (this.loading = false))

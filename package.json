@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "express": "^4.16.4",
-    "lodash": "^4.17.11",
+    "ramda": "^0.27.0",
     "vue-property-decorator": "^8.4.1"
   },
   "devDependencies": {
@@ -32,7 +32,7 @@
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "@nuxtjs/vuetify": "^1.11.0",
     "@types/aws-lambda": "^8.10.46",
-    "@types/lodash": "^4.14.149",
+    "@types/ramda": "github:types/npm-ramda#dist",
     "@vue/test-utils": "^1.0.0-beta.27",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
