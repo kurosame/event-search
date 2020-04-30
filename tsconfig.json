@@ -1,19 +1,25 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": "./",
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "lib": ["esnext", "esnext.asynciterable", "dom"],
+    // Basic
+    "target": "esnext",
     "module": "esnext",
-    "moduleResolution": "node",
+    "lib": ["esnext", "esnext.asynciterable", "dom"],
+    "sourceMap": true,
+    // Strict Type Checks
+    "strict": true,
+    // Additional Checks
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    // Module Resolution
+    "moduleResolution": "node",
+    "baseUrl": "./",
     "paths": { "~/*": ["./*"], "@/*": ["./*"] },
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "strict": true,
-    "target": "esnext",
-    "types": ["@types/node", "@nuxt/types", "@nuxtjs/axios", "@nuxtjs/vuetify"]
+    "types": ["@types/node", "@nuxt/types", "@nuxtjs/axios", "@nuxtjs/vuetify"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    // Experimental
+    "experimentalDecorators": true,
+    // Advanced
+    "skipLibCheck": true
   }
 }
