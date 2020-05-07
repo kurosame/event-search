@@ -31,8 +31,7 @@ jobs:
               "attachments": [
                 {
                   "pretext": "event-search's Outdated",
-                  "text": '$(npm outdated)',
-                  "mrkdwn_in": ["text"]
+                  "text": '$(npm outdated)'
                 }
               ]
             }
