@@ -6,6 +6,7 @@
 import Summary from '@/components/Summary.vue'
 
 export default {
+  name: 'EventSearch',
   components: {
     Summary
   }
