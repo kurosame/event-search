@@ -1,9 +1,7 @@
 {
   "name": "event-search",
-  "version": "1.0.0",
-  "description": "Event search App with Nuxt.js",
-  "author": "kurosame",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "nuxt-ts",
     "build": "nuxt-ts build",
